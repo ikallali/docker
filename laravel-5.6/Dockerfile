@@ -3,14 +3,16 @@ FROM php:7.2.3-apache-stretch
 RUN apt-get update && \
         apt-get install -y --no-install-recommends \
         curl \
+        sudo \
         wget \
         apt-transport-https \
         lsb-release \
         ca-certificates \
-        git
+        git \
+        gnupg
 
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && /bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
